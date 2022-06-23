@@ -44,17 +44,14 @@ function createNewNote(body, notes) {
   return note;
   }
 
-// function deleteNote(notes){
-    //do I need this if I'm using findById?
-//     fs.readFile(path.join(__dirname, './db/db.json'), "utf8", (err, notes) =>{
-        
-//     })
-// fs.writeFileSync(
-//     path.join(__dirname, './db/db.json'),
-//     JSON.stringify(notes, null, 2)
-//   );
+function deleteNote(notes){
+fs.writeFileSync(
+    path.join(__dirname, './db/db.json'),
+    JSON.stringify(notes, null, 2)
+  );
 
-// }
+}
+
 function validateNote(note) {
     if (!note.title || typeof note.title !== 'string') {
       return false;
@@ -86,10 +83,10 @@ app.get('/api/notes/:id', (req, res) => {
     const result = findById(req.params.id, notes);
     // console.log(req.params.id);
     if (result){
-    let filteredList = notes.filter((note) => {note.id !== req.params.id});
+    let filteredList = notes.filter((note) => note.id !== req.params.id);
     console.log(filteredList);
-//    return console.log(notes.filter((note) => {note.id !== req.params.id}));
-    //  res.json(notes.filter((note) => {note.id !== req.params.id});   
+// //    return console.log(notes.filter((note) => {note.id !== req.params.id}));
+   deleteNote(filteredList);
     }
   });
 
