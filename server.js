@@ -27,14 +27,6 @@ function filterByQuery(query, notes) {
     return filteredResults;
   }
 
-app.get('/api/notes', (req, res) => {
-    let results = notes;
-    if(req.query){
-        results = filterByQuery(req.query, results);
-    }
-    res.json(results);
-  });
-
 function findById(id, notes) {
     const result = notes.filter(note => note.id === id)[0];
     return result;
@@ -52,7 +44,18 @@ function createNewNote(body, notes) {
   return note;
   }
 
-  function validateNote(note) {
+// function deleteNote(notes){
+    //do I need this if I'm using findById?
+//     fs.readFile(path.join(__dirname, './db/db.json'), "utf8", (err, notes) =>{
+        
+//     })
+// fs.writeFileSync(
+//     path.join(__dirname, './db/db.json'),
+//     JSON.stringify(notes, null, 2)
+//   );
+
+// }
+function validateNote(note) {
     if (!note.title || typeof note.title !== 'string') {
       return false;
     }
@@ -61,6 +64,14 @@ function createNewNote(body, notes) {
     }
     return true;
   }
+
+app.get('/api/notes', (req, res) => {
+    let results = notes;
+    if(req.query){
+        results = filterByQuery(req.query, results);
+    }
+    res.json(results);
+  });
 
 app.get('/api/notes/:id', (req, res) => {
     const result = findById(req.params.id, notes);
@@ -71,9 +82,16 @@ app.get('/api/notes/:id', (req, res) => {
     }
   });
 
-app.delete('/api/notes/:id', (req, res) => {
-    
-})
+  app.delete('/api/notes/:id', (req, res) => {
+    const result = findById(req.params.id, notes);
+    // console.log(req.params.id);
+    if (result){
+    let filteredList = notes.filter((note) => {note.id !== req.params.id});
+    console.log(filteredList);
+//    return console.log(notes.filter((note) => {note.id !== req.params.id}));
+    //  res.json(notes.filter((note) => {note.id !== req.params.id});   
+    }
+  });
 
 app.post('/api/notes', (req, res) => {
     req.body.id = uuid();
