@@ -1,6 +1,6 @@
 //requires
 const express = require('express');
-const notes = require('./db/db.json');
+var notes = require('./db/db.json');
 const fs = require('fs');
 const path = require('path');
 
@@ -49,13 +49,13 @@ function createNewNote(body, notes) {
   }
 
 //deletes a note by syncing the file after it is filtered in the delete method
-function deleteNote(notes){
-fs.writeFileSync(
-    path.join(__dirname, './db/db.json'),
-    JSON.stringify(notes, null, 2)
-  );
-// location.reload();
-}
+// function deleteNote(notes){
+// fs.writeFileSync(
+//     path.join(__dirname, './db/db.json'),
+//     JSON.stringify(notes, null, 2)
+//   );
+// // location.reload();
+// }
 
 //validates if user data is entered correctly
 function validateNote(note) {
@@ -91,10 +91,13 @@ app.delete('/api/notes/:id', (req, res) => {
     const result = findById(req.params.id, notes);
     // console.log(req.params.id);
     if (result){
-    let filteredList = notes.filter((note) => note.id !== req.params.id);
+    var oldNotes = notes;
+    let filteredList = oldNotes.filter((note) => note.id !== req.params.id);
     console.log(filteredList);
-// //    return console.log(notes.filter((note) => {note.id !== req.params.id}));
-   deleteNote(filteredList);
+
+fs.writeFileSync('./db/db.json', JSON.stringify(filteredList));
+    notes = filteredList; 
+    JSON.stringify(filteredList, null, 2);
     }
   });
 
