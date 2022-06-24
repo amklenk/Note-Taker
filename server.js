@@ -37,7 +37,7 @@ function findById(id, notes) {
 
 //creates a new note by pushing an entry to the data array and syncing the file
 function createNewNote(body, notes) {
-    const note = body;
+    let note = body;
     notes.push(note);
 
     fs.writeFileSync(
@@ -97,7 +97,7 @@ app.delete('/api/notes/:id', (req, res) => {
 
 fs.writeFileSync('./db/db.json', JSON.stringify(filteredList));
     notes = filteredList; 
-    JSON.stringify(filteredList, null, 2);
+    res.json(filteredList);
     }
   });
 
