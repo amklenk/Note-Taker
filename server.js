@@ -16,6 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
+//functions
+//filters notes by query
 function filterByQuery(query, notes) {
     let filteredResults = notes;
     if (query.title) {
@@ -27,11 +29,13 @@ function filterByQuery(query, notes) {
     return filteredResults;
   }
 
+//parses through data to find a note by id
 function findById(id, notes) {
     const result = notes.filter(note => note.id === id)[0];
     return result;
   }
 
+//creates a new note by pushing an entry to the data array and syncing the file
 function createNewNote(body, notes) {
     const note = body;
     notes.push(note);
@@ -44,14 +48,16 @@ function createNewNote(body, notes) {
   return note;
   }
 
+//deletes a note by syncing the file after it is filtered in the delete method
 function deleteNote(notes){
 fs.writeFileSync(
     path.join(__dirname, './db/db.json'),
     JSON.stringify(notes, null, 2)
   );
-
+// location.reload();
 }
 
+//validates if user data is entered correctly
 function validateNote(note) {
     if (!note.title || typeof note.title !== 'string') {
       return false;
@@ -62,6 +68,8 @@ function validateNote(note) {
     return true;
   }
 
+//app methods
+//api
 app.get('/api/notes', (req, res) => {
     let results = notes;
     if(req.query){
@@ -79,7 +87,7 @@ app.get('/api/notes/:id', (req, res) => {
     }
   });
 
-  app.delete('/api/notes/:id', (req, res) => {
+app.delete('/api/notes/:id', (req, res) => {
     const result = findById(req.params.id, notes);
     // console.log(req.params.id);
     if (result){
@@ -99,7 +107,7 @@ app.post('/api/notes', (req, res) => {
         res.json(newNote);
       }
 })
-
+//html
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
   });
@@ -111,7 +119,7 @@ app.get('/notes', (req, res) =>{
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
   });
-
+//listen on heroku or localhost3001
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
   });
