@@ -1,11 +1,14 @@
 //requires
-var notes = require('../db/db.json');
+var notes = require('../../db/db.json');
 const fs = require('fs');
 const {  filterByQuery,
     findById,
     createNewNote,
-    validateNote } = require('../lib/notes');
+    validateNote } = require('../../lib/notes');
 const router = require('express').Router();
+
+// Helper method for generating unique ids
+const uuid = require('../../helpers/uuid');
 
 router.get('/notes', (req, res) => {
     let results = notes;
@@ -26,19 +29,18 @@ router.get('/notes/:id', (req, res) => {
 
 router.delete('/notes/:id', (req, res) => {
     const result = findById(req.params.id, notes);
-    // console.log(req.params.id);
     if (result){
     var oldNotes = notes;
     let filteredList = oldNotes.filter((note) => note.id !== req.params.id);
     console.log(filteredList);
 
-fs.writeFileSync('../db/db.json', JSON.stringify(filteredList));
+fs.writeFileSync('./db/db.json', JSON.stringify(filteredList));
     notes = filteredList; 
     res.json(filteredList);
     }
   });
 
-router.post('/api/notes', (req, res) => {
+router.post('/notes', (req, res) => {
     req.body.id = uuid();
     if (!validateNote(req.body)) {
         res.status(400).send('This note is not properly formatted.');
