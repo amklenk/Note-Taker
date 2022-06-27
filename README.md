@@ -32,7 +32,7 @@ npm install
 The .gitignore file is set up in the root directory along with the server.js file that contains the app.listen for the PORT, the middleware, and the imports for the routes. The routes folder contains two folders, the apiRoutes and the htmlRoutes folders. The apiRoutes folder contains the index.js as a route hub and notesRoutes.js, which contains the functions import and API routes. The htmlRoutes folder contains the index.js file, which contains the HTML routes. The public folder contains the front-end files (HTML for index and notes pages, CSS, and JS files). The lib folder contains the functions that the routes utilize. The helpers folder contains the uuid.js file to create a random index for each item in the database. The db folder contains the db.json that is acting as our database (even though it is a local json file).
 
 ## Links
-- [GitHub Repository](https://github.com/amklenk/Note-Takerr)
+- [GitHub Repository](https://github.com/amklenk/Note-Taker)
 - [Heroku Site Link](https://morning-escarpment-45926.herokuapp.com/)
 
 ## Usage
@@ -45,7 +45,7 @@ Deployed Heroku Site (Notes Page)
 ![Heroku Site Screenshot](./images/herokunotes.png)
 
 
-The application is navigable via running the server in an integrated terminal using either (right-click on file to open in integrated terminal):
+The application is navigable on the local host (localhost:3001) via running the server in an integrated terminal using either (right-click on file to open in integrated terminal):
 `````````````````````
 npx nodemon server.js
 `````````````````````
@@ -53,14 +53,15 @@ npx nodemon server.js
 `````````
 npm start
 ``````````
-. Running nodemon allows for code changes without needing to stop and start the server. When the server is running, visit the Heroku site (or localhost). The "Get Started" button takes you to the notes page (or with /notes query). A note is created by typing into the two entry points of the body for the note's title and text on the notes page. It is saved to the database and to the left-hand column by clicking the save button (floppy disk) Each note can be visited, but not edited, by clicking on it. Clicking the trash can on a note deletes it from the database and from the left-hand column.
+. Running nodemon allows for code changes without needing to stop and start the server. When the server is running, visit localhost:3001. The site can also be accessed on Heroku (see above link) without running the server. Upon navigating to the index, the "Get Started" button takes you to the notes page (or with /notes query). A note is created by typing into the two entry points of the body for the note's title and text on the notes page. It is saved to the database and to the left-hand column by clicking the save button (floppy disk). Each note can be visited, but not edited, by clicking on it. Clicking the plus icon allows for creating another note. Clicking the trash can on a note deletes it from the database and from the left-hand column.
 
 ## License
 The badge at the top of the page shows that this project is licensed under MIT. The link for that license is shown below.
 - [License: MIT](https://opensource.org/licenses/MIT)
+
 ## How to Contribute
 Please fork and clone the repository and use a pull request to add or make changes to the current repository.
 
 ## Questions
-Please direct any questions to amandamklenk3@gmail.com. To see more projects, visit the link below for amklenk's respository: 
+Please direct any questions to amandamklenk3@gmail.com. To see more projects, visit the link below for amklenk's respository:
 - [GitHub Repository](https://github.com/amklenk)
