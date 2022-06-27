@@ -8,11 +8,11 @@ The Note Taker was created for a small business owner. The application allows th
 
 The following were the requirements of the project:
 - When the user opens the application, they are presented with the landing page and a button to direct them to the notes page.
-- When the user clicks on a link to the notes page, they are routed to the notes page, which has the existing notes in the left-hand column and empty fields to enter a new note's title and text in the right-hand column.
-- When the user enters a new note title and the note's text, a Save icon appears in the navigation at the top of the page.
+- When the user clicks on the button to the notes page (or puts "/notes" at the end of their query), they are routed to the notes page, which has the existing notes in the left-hand column and empty fields to enter a new note's title and text in the right-hand column.
+- When the user enters a new note title and the note's text, a save icon appears in the navigation at the top of the page.
 - When the user clicks the save icon, the new note is saved and appears in the left-hand column with the other existing notes.
 - When the user clicks on a note in the left-hand column, the title and text appear in the right-hand column.
-- When the user clicks on the write icon in the navigation at the top of the page, the user is presented with empty fields to enter a new note title and the note's text in the right-hand column.
+- When the user clicks on the plus icon in the navigation at the top of the page, the user is presented with empty fields to enter a new note title and the note's text in the right-hand column.
 
 The application also needed to have a db.json file for the back end data, HTML routes (/, /notes), and API routes (GET and POST for api/notes).
 
